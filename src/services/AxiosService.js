@@ -1,0 +1,6 @@
+import Axios from 'axios'
+import { baseURL } from '../env'
+export const sandboxApi = Axios.create({
+  baseURL,
+  timeout: 8000
+})
