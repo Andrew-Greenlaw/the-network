@@ -12,8 +12,8 @@ class PostsService {
     })
     AppState.posts = res.data.posts.map(p => new Post(p))
     console.log(res.data)
-    page = res.data.page
-    page.splice(0, 2).parsInt()
+    let pagenum = res.data.page
+    pagenum.split(" ")
     console.log(page)
     // AppState.page = res.data.page.shift()
 
