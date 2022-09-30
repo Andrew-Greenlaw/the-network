@@ -27,7 +27,7 @@ import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 import Login from './components/Login.vue'
 import AdComponent from './components/AdComponent.vue'
-import LoginComponent from './components/LoginComponent.vue'
+import LoginComponent from './components/Login/LoginComponent.vue'
 
 export default {
   setup() {
