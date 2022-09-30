@@ -1,9 +1,9 @@
 <template>
-  <PostCard v-for="p in posts" :post="p" :key="p.id" />
   <div>
     <button class="btn" :disabled="page == 1" @click="go(-1)">Previous</button>
     <button class="btn" :disabled="page == lastPage" @click="go(1)">Next</button>
   </div>
+  <PostCard v-for="p in posts" :post="p" :key="p.id" />
 </template>
 
 <script>
@@ -30,13 +30,15 @@ export default {
     return {
       async go(n) {
         try {
-          if (AppState.page) { throw new Error('you have reached the end') }
+          if (AppState.page == 1 && n == -1) { throw new Error('you have reached the end') }
           await postsService.getPosts(AppState.page + n)
         } catch (error) {
           Pop.error(error, '[GET NEXT OR PREVIOUS PAGE]')
         }
       },
-      posts: computed(() => AppState.posts)
+      posts: computed(() => AppState.posts),
+      page: computed(() => AppState.page),
+      lastPage: computed(() => AppState.lastpage)
     };
   },
   components: { PostCard }

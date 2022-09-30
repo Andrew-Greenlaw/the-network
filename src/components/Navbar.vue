@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
@@ -24,10 +24,14 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
+      LOGIN COMPONENT HERE
     </div>
-  </nav>
+  </nav> -->
+  <div class="navbar p-2">
+    <h2>Network</h2>
+    <input type="text" placeholder="search">
+
+  </div>
 </template>
 
 <script>
@@ -53,5 +57,11 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.navbar {
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

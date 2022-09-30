@@ -1,21 +1,33 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+  <main class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <LoginComponent />
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <Navbar />
+          </div>
+          <div class="col-md-9">
+            <router-view />
+          </div>
+          <div class="col-md-3">
+            <AdComponent />
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </main>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
+import Login from './components/Login.vue'
+import AdComponent from './components/AdComponent.vue'
+import LoginComponent from './components/LoginComponent.vue'
 
 export default {
   setup() {
@@ -23,7 +35,7 @@ export default {
       appState: computed(() => AppState)
     }
   },
-  components: { Navbar }
+  components: { Navbar, Login, AdComponent, LoginComponent }
 }
 </script>
 <style lang="scss">

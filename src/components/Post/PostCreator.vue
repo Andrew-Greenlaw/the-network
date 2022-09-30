@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex gap-3">
-    <img :src="creator.picture" :alt="creator.name" :title="creator.name">
-    <h4>{{creator.name}}</h4>
+    <router-link :to="{name: 'Profile',params: {id: creator.id}}">
+      <img :src="creator.picture" :alt="creator.name" :title="creator.name">
+    </router-link>
+    <div>
+      <h5>{{creator.name}}</h5>
+      <p v-if="creator.graduated == true"><i class="mdi mdi-school"></i></p>
+    </div>
   </div>
 </template>
 

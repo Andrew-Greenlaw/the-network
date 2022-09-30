@@ -1,10 +1,12 @@
 <template>
-  <div class="post-card col-12">
-    <div>
-      <PostCreator :creator="post.creator" />
-    </div>
-    <div>
-      <p>{{post.body}}</p>
+  <div class="post-card col-12 p-2">
+    <div class="card elevation-1">
+      <div class="card-body">
+        <PostCreator :creator="post.creator" />
+        <div class="p-3">
+          <p class="m-0">{{post.body}}</p>
+        </div>
+      </div>
     </div>
 
   </div>

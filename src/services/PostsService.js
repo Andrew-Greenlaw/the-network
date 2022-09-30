@@ -11,13 +11,10 @@ class PostsService {
       }
     })
     AppState.posts = res.data.posts.map(p => new Post(p))
-    console.log(res.data)
-    let pagenum = res.data.page
-    pagenum.split(" ")
-    console.log(page)
-    // AppState.page = res.data.page.shift()
-
-    console.log(AppState.posts)
+    let pageNum = res.data.page.split(' ', 1)
+    pageNum = parseInt(pageNum, 10)
+    AppState.page = pageNum
+    AppState.lastpage = res.data.totalPages
   }
 }
 export const postsService = new PostsService()
