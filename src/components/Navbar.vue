@@ -64,7 +64,7 @@ a:hover {
 }
 
 .navbar {
-  background-color: aqua;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
 }

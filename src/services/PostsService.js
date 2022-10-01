@@ -7,6 +7,7 @@ class PostsService {
     AppState.posts = []
     const res = await sandboxApi.get('/api/posts')
     AppState.posts = res.data.posts.map(p => new Post(p))
+    console.log(AppState.posts)
     AppState.nextPage = res.data.older
     AppState.previousPage = res.data.newer
   }
@@ -14,14 +15,14 @@ class PostsService {
     AppState.posts = []
     const res = await sandboxApi.get(`/api/profiles/${creatorId}/posts`)
     AppState.posts = res.data.posts.map(p => new Post(p))
+
     AppState.nextPage = res.data.older
     AppState.previousPage = res.data.newer
   }
   async changePage(pageUrl) {
     const res = await sandboxApi.get(pageUrl)
-    // Maybe dont want map?
-    // .map(p => new Post(p))
-    AppState.posts = res.data.posts
+    // why can not use map?
+    AppState.posts = res.data.posts.map(p => new Post(p))
     AppState.nextPage = res.data.older
     AppState.previousPage = res.data.newer
   }

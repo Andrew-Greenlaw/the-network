@@ -1,4 +1,7 @@
 <template>
+  <header>
+    <div class="head"></div>
+  </header>
   <main class="container-fluid">
     <div class="row">
       <div class="col-md-3">
@@ -6,10 +9,10 @@
       </div>
       <div class="col-md-9">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 network">
             <Navbar />
           </div>
-          <div class="col-md-9">
+          <div class="col-md-9 scroll">
             <router-view />
           </div>
           <div class="col-md-3">
@@ -19,6 +22,9 @@
       </div>
     </div>
   </main>
+  <footer class="d-flex">
+    <div class="foot"></div>
+  </footer>
 </template>
 
 <script>
@@ -40,4 +46,14 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+
+.scroll {
+  height: 90vh;
+  overflow-y: auto;
+}
+
+.network {
+  height: 10vh;
+  background-color: aqua;
+}
 </style>

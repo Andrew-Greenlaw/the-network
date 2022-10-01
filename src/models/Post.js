@@ -8,5 +8,6 @@ export class Post {
     this.creator = new Account(data.creator)
     this.likeIds = data.likeIds
     this.likes = data.likes
+    this.imgUrl = data.imgUrl
   }
 }
