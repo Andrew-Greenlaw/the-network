@@ -28,9 +28,13 @@
     </div>
   </nav> -->
   <div class="navbar p-2">
-    <h2>Network</h2>
-    <input type="text" placeholder="search">
-
+    <router-link :to="{ name: 'Home' }">
+      <h2>Network</h2>
+    </router-link>
+    <!-- TODO searchpage -->
+    <!-- <router-link :to="{name: 'Search'}">
+    </router-link> -->
+    <SearchForm />
   </div>
 </template>
 

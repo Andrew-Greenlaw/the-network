@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button class="btn" :disabled="page == 1" @click="go(-1)">Previous</button>
-    <button class="btn" :disabled="page == lastPage" @click="go(1)">Next</button>
+    <button class="btn" :disabled="!previousPage" @click="changePage(previousPage)">Previous</button>
+    <button class="btn" :disabled="!nextPage" @click="changePage(nextPage)">Next</button>
   </div>
+  <PostForm />
   <PostCard v-for="p in posts" :post="p" :key="p.id" />
 </template>
 
@@ -13,7 +14,6 @@ import { onMounted } from 'vue';
 import { AppState } from '../AppState.js';
 import { computed } from '@vue/reactivity';
 import PostCard from '../components/Post/PostCard.vue';
-
 export default {
   setup() {
     async function getPosts() {
@@ -28,17 +28,28 @@ export default {
       getPosts();
     });
     return {
-      async go(n) {
+      // async go(n) {
+      //   try {
+      //     if (AppState.page == 1 && n == -1) { throw new Error('you have reached the end') }
+      //     await postsService.getPosts(AppState.page + n)
+      //   } catch (error) {
+      //     Pop.error(error, '[GET NEXT OR PREVIOUS PAGE]')
+      //   }
+      // },
+      async changePage(pageUrl) {
         try {
-          if (AppState.page == 1 && n == -1) { throw new Error('you have reached the end') }
-          await postsService.getPosts(AppState.page + n)
+          if (!AppState.term) {
+            await postsService.changePage(pageUrl)
+          } else {
+            await postsService.getPostsBySearchTerm(AppState.term, pageUrl)
+          }
         } catch (error) {
-          Pop.error(error, '[GET NEXT OR PREVIOUS PAGE]')
+          Pop.error(error, '[Change Page]')
         }
       },
       posts: computed(() => AppState.posts),
-      page: computed(() => AppState.page),
-      lastPage: computed(() => AppState.lastpage)
+      nextPage: computed(() => AppState.nextPage),
+      previousPage: computed(() => AppState.previousPage)
     };
   },
   components: { PostCard }
@@ -46,23 +57,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-
-  .home-card {
-    width: 50vw;
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
+.img {
+  height: 200px;
+  max-width: 200px;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 </style>

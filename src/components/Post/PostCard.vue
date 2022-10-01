@@ -1,5 +1,5 @@
 <template>
-  <div class="post-card col-12 p-2">
+  <div class="post-card col-12 p-3">
     <div class="card elevation-1">
       <div class="card-body">
         <PostCreator :creator="post.creator" />
