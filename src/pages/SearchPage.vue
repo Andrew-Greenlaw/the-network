@@ -7,13 +7,13 @@
 
 
 <script>
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 
 export default {
   setup() {
     // TODO get posts
     // get posts by search term
-    onMounted(() => getPostson)
+    // onMounted(() => getpo)
     return {}
   }
 }

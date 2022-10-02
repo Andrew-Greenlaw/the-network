@@ -29,7 +29,7 @@
   </nav> -->
   <div class="navbar p-2">
     <router-link :to="{ name: 'Home' }">
-      <h2>Network</h2>
+      <h2 @click="getPosts()">Network</h2>
     </router-link>
     <!-- TODO searchpage -->
     <!-- <router-link :to="{name: 'Search'}">
@@ -39,10 +39,20 @@
 </template>
 
 <script>
+import { postsService } from '../services/PostsService.js';
+import Pop from '../utils/Pop.js';
 import Login from './Login.vue'
 export default {
   setup() {
-    return {}
+    return {
+      async getPosts() {
+        try {
+          await postsService.getPosts()
+        } catch (error) {
+          Pop.error('[GetPosts]', error)
+        }
+      }
+    }
   },
   components: { Login }
 }

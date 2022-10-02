@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex gap-3">
+  <div class="d-flex gap-3 align-items-center">
     <router-link :to="{name: 'Profile',params: {id: creator.id}}">
       <img :src="creator.picture" :alt="creator.name" :title="creator.name">
     </router-link>
@@ -26,8 +26,6 @@ export default {
   }
 }
 </script>
-
-
 <style lang="scss" scoped>
 img {
   height: 64px;
@@ -35,5 +33,9 @@ img {
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
+}
+
+p {
+  margin: unset;
 }
 </style>

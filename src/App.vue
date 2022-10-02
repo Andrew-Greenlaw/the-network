@@ -4,9 +4,7 @@
   </header>
   <main class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
-        <LoginComponent />
-      </div>
+      <LoginComponent />
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-12 network">
@@ -15,8 +13,8 @@
           <div class="col-md-9 scroll">
             <router-view />
           </div>
-          <div class="col-md-3">
-            <AdComponent />
+          <div class="col-md-3 scroll">
+            <AdComponent v-for="p in products" :product="p" :key="p.title" />
           </div>
         </div>
       </div>
@@ -28,17 +26,29 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 import Login from './components/Login.vue'
 import AdComponent from './components/AdComponent.vue'
 import LoginComponent from './components/Login/LoginComponent.vue'
-
+import Pop from './utils/Pop.js'
+import { productsService } from '../src/services/ProductsService.js'
 export default {
   setup() {
+    async function getProducts() {
+      try {
+        await productsService.getProducts()
+      } catch (error) {
+        Pop.error('[Get Ads]', error)
+      }
+    }
+    onMounted(() => {
+      getProducts()
+    })
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      products: computed(() => AppState.products)
     }
   },
   components: { Navbar, Login, AdComponent, LoginComponent }

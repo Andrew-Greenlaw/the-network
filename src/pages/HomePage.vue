@@ -1,9 +1,5 @@
 <template>
   <div class="row route-view">
-    <div>
-      <button class="btn" :disabled="!previousPage" @click="changePage(previousPage)">Previous</button>
-      <button class="btn" :disabled="!nextPage" @click="changePage(nextPage)">Next</button>
-    </div>
     <div class="post-form col-12 p-3" v-if="account.id">
       <div class="card elevation-1">
         <div class="card-body">
@@ -11,7 +7,11 @@
         </div>
       </div>
     </div>
-    <PostCard v-for="p in posts" :post="p" :key="p.id" />
+    <PostCard v-for="p in posts" :post="p" :key="p.id" @deletePost="deletePost(p.id)" />
+    <div class="col-12 d-flex justify-content-between px-5 my-4">
+      <button class="btn selectable" :disabled="!previousPage" @click="changePage(previousPage)">Previous</button>
+      <button class="btn selectable" :disabled="!nextPage" @click="changePage(nextPage)">Next</button>
+    </div>
   </div>
 </template>
 
@@ -37,21 +37,18 @@ export default {
       getPosts();
     });
     return {
-      // async go(n) {
-      //   try {
-      //     if (AppState.page == 1 && n == -1) { throw new Error('you have reached the end') }
-      //     await postsService.getPosts(AppState.page + n)
-      //   } catch (error) {
-      //     Pop.error(error, '[GET NEXT OR PREVIOUS PAGE]')
-      //   }
-      // },
+      async deletePost(id) {
+        try {
+          const yes = await Pop.confirm('Delete your Post?')
+          if (!yes) { return }
+          await postsService.deletePost(id)
+        } catch (error) {
+          Pop.error('[DeletePost]', error)
+        }
+      },
       async changePage(pageUrl) {
         try {
-          if (!AppState.term) {
-            await postsService.changePage(pageUrl)
-          } else {
-            await postsService.getPostsBySearchTerm(AppState.term, pageUrl)
-          }
+          await postsService.changePage(pageUrl)
         } catch (error) {
           Pop.error(error, '[Change Page]')
         }

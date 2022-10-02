@@ -24,6 +24,7 @@ export default {
       async handleSubmit() {
         try {
           await postsService.getPostsBySearchTerm(editable.value.term)
+          editable.value = {}
         } catch (error) {
           Pop.error(error, '[SearchForm]')
         }
