@@ -78,7 +78,7 @@ export default {
   }
 
   img {
-    max-height: 450px;
+    // max-height: 450px;
     object-fit: cover;
     object-position: center;
   }

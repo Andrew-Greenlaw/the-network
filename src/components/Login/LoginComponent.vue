@@ -44,4 +44,16 @@ export default {
     align-items: center;
   }
 }
+
+@media screen and (max-width:700px) {
+  .login-component {
+    height: 30vh;
+
+    .login-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 </style>

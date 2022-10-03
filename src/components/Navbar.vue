@@ -29,7 +29,7 @@
   </nav> -->
   <div class="navbar p-2">
     <router-link :to="{ name: 'Home' }">
-      <h2 @click="getPosts()" class="text-light text-shadow"><span class="network">N</span>etwork</h2>
+      <h2 @click="getPosts()" class="text-light text-shadow "><span class="network">Network</span></h2>
     </router-link>
     <!-- TODO searchpage -->
     <!-- <router-link :to="{name: 'Search'}">
