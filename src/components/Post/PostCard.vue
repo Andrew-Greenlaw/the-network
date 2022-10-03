@@ -8,7 +8,8 @@
           <i class="mdi mdi-close selectable rounded" @click.stop="$emit('deletePost')"
             v-if="account.id == post.creatorId" title="Delete"></i>
           <div class="d-flex align-items-center selectable rounded" v-if="user.isAuthenticated">
-            <i class="mdi mdi-heart fs-5" @click="toggleLike(post.id)"></i>
+            <i class="mdi mdi-heart fs-5" @click="toggleLike(post.id)" v-if="post.likeIds.includes(account.id)"></i>
+            <i class="mdi mdi-heart-outline fs-5" @click="toggleLike(post.id)" v-else></i>
             <p id="likes"> {{post.likeIds.length}}</p>
           </div>
           <div class="d-flex align-items-center selectable rounded" v-else="!user.isAuthenticated">
