@@ -1,29 +1,17 @@
 <template>
-  <span class="navbar-text">
-    <button
-      class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
-      @click="login"
-      v-if="!user.isAuthenticated"
-    >
+  <span class="">
+    <button class="login btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login"
+      v-if="!user.isAuthenticated">
       Login
     </button>
-
     <div class="dropdown my-2 my-lg-0" v-else>
-      <div
-        class="dropdown-toggle selectable"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        id="authDropdown"
-      >
-        <div v-if="account.picture || user.picture">
-          <img
-            :src="account.picture || user.picture"
-            alt="account photo"
-            height="40"
-            class="rounded"
-          />
-          <span class="mx-3 text-success lighten-30">{{ account.name || user.name }}</span>
+      <div class="dropdown-toggle selectable rounded p-3" data-bs-toggle="dropdown" aria-expanded="false"
+        id="authDropdown">
+        <div v-if="account.picture || user.picture" class=" d-flex flex-wrap justify-content-center">
+          <img :src="account.picture || user.picture" alt="account photo" class="user-picture" />
+          <span class="mx-3 lighten-30 fs-5">{{ account.name || user.name }}</span>
         </div>
+
       </div>
       <div class="dropdown-menu p-0 list-group w-100" aria-labelledby="authDropdown">
         <router-link :to="{ name: 'Account' }">
@@ -66,6 +54,19 @@ export default {
   display: block;
   transform: scale(0);
   transition: all 0.15s linear;
+}
+
+.user-picture {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  outline: #98C1D9 solid 1px;
+}
+
+.login {
+  font-size: 2rem;
 }
 
 .dropdown-menu.show {

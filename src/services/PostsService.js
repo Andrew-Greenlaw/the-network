@@ -7,6 +7,7 @@ class PostsService {
     AppState.posts = []
     const res = await sandboxApi.get('/api/posts/')
     AppState.posts = res.data.posts.map(p => new Post(p))
+    // console.log(AppState.posts)
     AppState.nextPage = res.data.older
     AppState.previousPage = res.data.newer
   }
@@ -37,15 +38,19 @@ class PostsService {
     AppState.term = term
   }
   async createPost(formData) {
-    console.log(formData)
     const res = await sandboxApi.post('/api/posts', formData)
     console.log(res.data)
     AppState.posts = [new Post(res.data), ...AppState.posts]
 
   }
   async deletePost(id) {
-    const res = await sandboxApi.delete(`api/posts/${id}`)
+    await sandboxApi.delete(`/api/posts/${id}`)
     AppState.posts = AppState.posts.filter(p => p.id != id)
+  }
+  async toggleLike(id) {
+    const res = await sandboxApi.post(`/api/posts/${id}/like`)
+    let post = AppState.posts.findIndex(p => p.id == id)
+    AppState.posts.splice(post, 1, new Post(res.data))
   }
 }
 export const postsService = new PostsService()

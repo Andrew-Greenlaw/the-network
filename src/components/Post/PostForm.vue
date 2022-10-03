@@ -3,10 +3,14 @@
     <form @submit.prevent="handleSubmit">
       <!-- TODO i need to make a body as a textarea and picture input if the so choose and a submit button -->
       <div class="d-flex">
-        <div class="pe-3"><img :src="creator.picture" :alt="creator.name"></div>
+        <div class="pe-3">
+          <router-link :to="{name: 'Profile',params: {id: creator.id}}">
+            <img :src="creator.picture" :alt="creator.name">
+          </router-link>
+        </div>
         <div class="flex-grow-1">
           <textarea class="form-control mb-3" id="body" v-model="editable.body" rows="3"
-            placeholder="Share whats happening" required></textarea>
+            placeholder="Share whats happening" required maxlength="300"></textarea>
           <div class="d-flex justify-content-between">
             <div class="flex-grow-1">
               <input type="url" class="form-control" id="imgUrl" v-model="editable.imgUrl"

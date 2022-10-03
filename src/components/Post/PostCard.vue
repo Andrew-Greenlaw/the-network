@@ -2,15 +2,23 @@
   <div class="post-card col-12 px-3 mt-3">
     <div class="card elevation-1">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <PostCreator :creator="post.creator" />
-        <div>
-          <i class="mdi mdi-delete selectable rounded" @click.stop="$emit('deletePost')"
-            v-if="account.id == post.creatorId"></i>
-          <p class="selectable rounded" id="likes"> <i class="mdi mdi-heart"></i>{{post.likeIds.length}}</p>
+        <PostCreator :creator="post.creator" :post="post" />
+
+        <div class="text-end">
+          <i class="mdi mdi-close selectable rounded" @click.stop="$emit('deletePost')"
+            v-if="account.id == post.creatorId" title="Delete"></i>
+          <div class="d-flex align-items-center selectable rounded" v-if="user.isAuthenticated">
+            <i class="mdi mdi-heart fs-5" @click="toggleLike(post.id)"></i>
+            <p id="likes"> {{post.likeIds.length}}</p>
+          </div>
+          <div class="d-flex align-items-center selectable rounded" v-else="!user.isAuthenticated">
+            <i class="mdi mdi-heart fs-5" @click="notify()"></i>
+            <p id="likes"> {{post.likeIds.length}}</p>
+          </div>
         </div>
       </div>
       <div class="img bg-dark text-center" v-if="post.imgUrl">
-        <img class="img-fluid" :src="post.imgUrl" alt="unable to show picture">
+        <img class="img-fluid" :src="post.imgUrl" alt="post img">
       </div>
       <div class="card-footer">
         <div class="p-3">
@@ -26,6 +34,8 @@
 import { computed } from '@vue/reactivity';
 import { AppState } from '../../AppState.js';
 import { Post } from '../../models/Post.js';
+import { postsService } from '../../services/PostsService.js';
+import Pop from '../../utils/Pop.js';
 import PostCreator from './PostCreator.vue';
 
 export default {
@@ -38,8 +48,19 @@ export default {
   setup({ emit }) {
     return {
       account: computed(() => AppState.account),
+      user: computed(() => AppState.user),
       deletePost() {
         emit('deletePost')
+      },
+      async toggleLike(id) {
+        try {
+          await postsService.toggleLike(id)
+        } catch (error) {
+          Pop.error('[addLike]')
+        }
+      },
+      notify() {
+        Pop.error('You Need to Login')
       }
     };
   },
@@ -50,6 +71,10 @@ export default {
 
 <style lang="scss" scoped>
 .post-card {
+
+  .heart {
+    color: red;
+  }
 
   img {
     max-height: 450px;

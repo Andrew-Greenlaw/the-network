@@ -22,7 +22,19 @@
   </main>
   <footer class="d-flex">
     <div class="foot"></div>
+    <div class="modal fade" id="accountEdit" tabindex="-1" aria-labelledby="accountEditLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="accountEditLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <AccountForm />
+        </div>
+      </div>
+    </div>
   </footer>
+
 </template>
 
 <script>
@@ -34,6 +46,7 @@ import AdComponent from './components/AdComponent.vue'
 import LoginComponent from './components/Login/LoginComponent.vue'
 import Pop from './utils/Pop.js'
 import { productsService } from '../src/services/ProductsService.js'
+import AccountForm from './components/AccountForm.vue'
 export default {
   setup() {
     async function getProducts() {
@@ -51,7 +64,7 @@ export default {
       products: computed(() => AppState.products)
     }
   },
-  components: { Navbar, Login, AdComponent, LoginComponent }
+  components: { Navbar, Login, AdComponent, LoginComponent, AccountForm }
 }
 </script>
 <style lang="scss">
@@ -64,6 +77,6 @@ export default {
 
 .network {
   height: 10vh;
-  background-color: aqua;
+  background-color: #533A7B;
 }
 </style>

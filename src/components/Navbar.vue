@@ -29,7 +29,7 @@
   </nav> -->
   <div class="navbar p-2">
     <router-link :to="{ name: 'Home' }">
-      <h2 @click="getPosts()">Network</h2>
+      <h2 @click="getPosts()" class="text-light text-shadow"><span class="network">N</span>etwork</h2>
     </router-link>
     <!-- TODO searchpage -->
     <!-- <router-link :to="{name: 'Search'}">
@@ -63,6 +63,12 @@ a:hover {
   text-decoration: none;
 }
 
+.text-shadow {
+  color: aliceblue;
+  text-shadow: 1px 1px rgb(49, 49, 49), 0px 0px 5px rgb(162, 162, 162);
+  letter-spacing: 0.08rem
+}
+
 .nav-link {
   text-transform: uppercase;
 }
@@ -77,5 +83,13 @@ a:hover {
   height: 10vh;
   display: flex;
   justify-content: space-between;
+}
+
+.network {
+  font-family: 'Righteous', cursive;
+}
+
+a {
+  color: rgb(12, 12, 12);
 }
 </style>

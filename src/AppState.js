@@ -11,7 +11,6 @@ export const AppState = reactive({
   activeProfile: null,
   /** @type {import('./models/Product.js').Product} */
   products: [],
-  likes: [],
   nextPage: null,
   previousPage: null,
   term: ''

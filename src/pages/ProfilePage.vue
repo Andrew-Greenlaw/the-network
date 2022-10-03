@@ -3,12 +3,11 @@
     <div class="profile-details">
       <ProfileDetail :profile="profile" />
     </div>
-    <button class="btn" :disabled="!previousPage" @click="changePage(previousPage)">Previous</button>
-    <button class="btn" :disabled="!nextPage" @click="changePage(nextPage)">Next</button>
     <PostCard v-for="p in posts" :post="p" :key="p.id" />
-    <!-- <router-link :to="{ name: 'Home' }">
-      <button class="btn" @click=""></button>
-    </router-link> -->
+    <div class="d-flex justify-content-between px-5 py-3">
+      <button class="btn" :disabled="!previousPage" @click="changePage(previousPage)">Previous</button>
+      <button class="btn" :disabled="!nextPage" @click="changePage(nextPage)">Next</button>
+    </div>
   </div>
   <div v-else>
     Loading...

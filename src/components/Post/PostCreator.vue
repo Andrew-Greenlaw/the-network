@@ -5,7 +5,10 @@
     </router-link>
     <div>
       <h5>{{creator.name}}</h5>
-      <p v-if="creator.graduated == true"><i class="mdi mdi-school"></i></p>
+      <div class="d-flex">
+        <p>{{post.createdAt}}</p>
+        <p class="px-3" v-if="creator.graduated == true"><i class="mdi mdi-school"></i></p>
+      </div>
     </div>
   </div>
 </template>
@@ -13,11 +16,16 @@
 
 <script>
 import { Account } from '../../models/Account.js';
+import { Post } from '../../models/Post.js';
 
 export default {
   props: {
     creator: {
       type: Account,
+      required: true
+    },
+    post: {
+      type: Post,
       required: true
     }
   },
