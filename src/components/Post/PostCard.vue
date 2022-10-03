@@ -13,7 +13,7 @@
             <p id="likes"> {{post.likeIds.length}}</p>
           </div>
           <div class="d-flex align-items-center selectable rounded" v-else="!user.isAuthenticated">
-            <i class="mdi mdi-heart fs-5" @click="notify()"></i>
+            <i class="mdi mdi-heart-outline fs-5" @click="notify()"></i>
             <p id="likes"> {{post.likeIds.length}}</p>
           </div>
         </div>
